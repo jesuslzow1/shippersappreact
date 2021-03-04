@@ -7,12 +7,9 @@ export const ShippersNewRequest = () => {
     const [currentProgress, setCurrentProgress] = useState(0);
     const [ocrText, setOcrText] = useState([]);
     const [size, setSize] = useState(0);
+    const [imageVisible, setImageVisible] = useState('none');
+    const [srcImage, setSrcImage] = useState('')
 
-    const handleDtagEnter = function (e) {
-        let dt = e.dataTransfer;
-        let files = dt.files;
-        console.log(files)
-    }
     document.onpaste = function (pasteEvent) {
         const item = pasteEvent.clipboardData.items[0];
         if (item.type.indexOf("image") === 0) {
@@ -49,42 +46,31 @@ export const ShippersNewRequest = () => {
             images.filter((_, index) => index !== image_index)
         ))
     }
-
-
-
-
     const handleDragEnter = e => {
         e.preventDefault();
         e.stopPropagation();
-        let dt = e.dataTransfer;
-        let files = dt.files;
-        console.log(files)
-        
     };
     const handleDragLeave = e => {
         e.preventDefault();
         e.stopPropagation();
-        let dt = e.dataTransfer;
-        let files = dt.files;
-        console.log(files)
-    }; 
+    };
     const handleDragOver = e => {
         e.preventDefault();
         e.stopPropagation();
-        let dt = e.dataTransfer;
-        let files = dt.files;
-        console.log(files)
+        //let dt = e.dataTransfer;
+        //let files = dt.files;
+        //console.log(files)
     };
     const handleDrop = e => {
         e.preventDefault();
         e.stopPropagation();
         let dt = e.dataTransfer;
         let files = dt.files;
-        console.log(files)
+        //console.log(files)
         const item = files[0];
         if (item.type.indexOf("image") === 0) {
             var fr = new FileReader();
-            fr.onload = function(){
+            fr.onload = function () {
                 var imag_url = fr.result;
                 setImages(() => [
                     ...images,
@@ -93,15 +79,18 @@ export const ShippersNewRequest = () => {
             }
             fr.readAsDataURL(files[0]);
 
-        }else{
+        } else {
             Swal.fire('Formato no válido', 'Comienza pegando una o varias imagenes de un shipper', 'error')
         }
-        
     };
+    const openModalImage = (src_image) =>{
+        setImageVisible('block')
+        setSrcImage(src_image)
+    }
     return (
         <div className="row">
             <div id="divDropArea" onDrop={e => handleDrop(e)}
-                 onDragOver={e => handleDragOver(e)}
+                onDragOver={e => handleDragOver(e)}
                 onDragEnter={e => handleDragEnter(e)}
                 onDragLeave={e => handleDragLeave(e)} className="col-xl-12 col-md-12 card drag-drop-zone">
                 <p>Drag files here to upload</p>
@@ -110,13 +99,12 @@ export const ShippersNewRequest = () => {
 
                 {
                     images.map((src_image, index) => (
-                        <div key={index} className="show-image">
-                            {
-                                console.log(index)
-                            }
-                            <img className="img-fluid img-linker" src={src_image} alt="index" />
+                        <div key={index} className="show-image" >
+                            <img className="img-fluid img-linker" src={src_image} alt="index" onClick={() => openModalImage(src_image)} />
+                            <div class="overlay"></div>
                             <button type="button" className="img-buttons-times" onClick={() => deleteImage(index)}>&times; </button>
                         </div>
+                        
                     ))
                 }
             </div>
@@ -161,8 +149,18 @@ export const ShippersNewRequest = () => {
                 }
 
             </div>
-            
-
+            {
+                imageVisible && (
+                    <div id="myModal" className="modal" style={{ display: imageVisible }}>
+                        <span className="close" onClick={() => {
+                            setImageVisible('none');
+                            setSrcImage('')
+                        }}>&times;</span>
+                        <img className="modal-content" src={srcImage} alt="image_asset" />
+                        <div id="caption"></div>
+                    </div>
+                )
+            }
         </div>
     )
 }
