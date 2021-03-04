@@ -5,6 +5,7 @@ export const ProgressBar = ({current}) => {
     current = 0
   }
   return (
+     <>
     <div className="progress">
       <div
         className="progress-bar progress_bar_width"
@@ -12,9 +13,11 @@ export const ProgressBar = ({current}) => {
         aria-valuenow={(current * 100).toString()}
         aria-valuemin="0"
         aria-valuemax="100"
-      >
+        >
         {current * 100}%
       </div>
     </div>
+    
+        </>
   );
 };
