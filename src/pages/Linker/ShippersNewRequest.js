@@ -88,11 +88,11 @@ export const ShippersNewRequest = () => {
         setSrcImage(src_image)
     }
     return (
-        <div className="row">
+        <div className="row container my-2">
             <div id="divDropArea" onDrop={e => handleDrop(e)}
                 onDragOver={e => handleDragOver(e)}
                 onDragEnter={e => handleDragEnter(e)}
-                onDragLeave={e => handleDragLeave(e)} className="col-xl-12 col-md-12 card drag-drop-zone">
+                onDragLeave={e => handleDragLeave(e)} className="col-xl-12 col-md-12 card drag-drop-zone bg bg-dark">
                 <p>Drag files here to upload</p>
             </div>
             <div className="col-xl-12 col-md-12">
@@ -101,7 +101,7 @@ export const ShippersNewRequest = () => {
                     images.map((src_image, index) => (
                         <div key={index} className="show-image" >
                             <img className="img-fluid img-linker" src={src_image} alt="index" onClick={() => openModalImage(src_image)} />
-                            <div class="overlay"></div>
+                            <div className="overlay"></div>
                             <button type="button" className="img-buttons-times" onClick={() => deleteImage(index)}>&times; </button>
                         </div>
                         
