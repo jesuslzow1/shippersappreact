@@ -1,8 +1,7 @@
 import React, {useState} from 'react';
 import { useDispatch } from 'react-redux';
 import { loginUserAction } from '../../actions/usersActions';
-import './main.css';
-import './util.css';
+import './Login.css';
 export const Login = () => {
     const dispatch = useDispatch();
     const loginUser = (user) => dispatch(loginUserAction(user));
@@ -35,16 +34,14 @@ export const Login = () => {
                         </span>
 
                         <div className="wrap-input100 validate-input" >
-                            <input className="input100" type="text" name="TID" value={loginFormValues.TID} onChange={handleLoginForm} />
-                            <span className="focus-input100" data-placeholder="TID"></span>
+                            <input className="input100" placeholder="TID" type="text" name="TID" value={loginFormValues.TID} onChange={handleLoginForm} />
                         </div>
 
                         <div className="wrap-input100 validate-input">
                             <span className="btn-show-pass">
                                 <i className="zmdi zmdi-eye"></i>
                             </span>
-                            <input className="input100" type="password" name="password" value={loginFormValues.password} onChange={handleLoginForm} />
-                            <span className="focus-input100" data-placeholder="Password"></span>
+                            <input className="input100" type="password" placeholder="PASSWORD" name="password" value={loginFormValues.password} onChange={handleLoginForm} />
                         </div>
 
                         <div className="container-login100-form-btn">
