@@ -10,10 +10,10 @@ import {
 export const Navigation = ({role}) => {
   const [current, setCurrent] = useState("home");
   const handleClick = (e) => {
-    console.log("click", e);
+    //console.log("click", e);
     setCurrent(e.key);
   };
-  console.log(role)
+  //console.log(role)
   return (
     <>
       <Menu
@@ -29,7 +29,7 @@ export const Navigation = ({role}) => {
           <Link to="/linker/create_request">Create Request</Link>
         </Menu.Item>
         <Menu.Item key="logout" icon={<UserAddOutlined />} className="float-right">
-          Logout
+          <Link to="/logout">Logout</Link>
         </Menu.Item>
       </Menu>
     </>

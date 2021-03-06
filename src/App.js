@@ -3,11 +3,11 @@ import { Login } from "./pages/auth/Login";
 import { HomePage } from "./pages/Home/HomePage";
 import { ShippersNewRequest } from "./pages/Linker/ShippersNewRequest";
 import { Navigation } from "./components/Nav/Navigation";
-
+import {Logout} from './pages/Logout/Logout';
 import { useSelector } from "react-redux";
 function App() {
   const user =  useSelector(state => state.user.user);
-    console.log(user)
+  //console.log(user)
   return (
     <>
       <Router>
@@ -24,6 +24,7 @@ function App() {
                   path="/linker/create_request"
                   component={ShippersNewRequest}
                 ></Route>
+                <Route exact path='/logout' component={Logout}></Route>
                 </>
 
               )
